@@ -1,3 +1,6 @@
+.loader{
+  margin:40px 20px;
+}
 table {
   width: 89.8vw;
   padding: 0 40px;
@@ -12,6 +15,9 @@ h1 {
 }
 h2 {
   text-align: center;
+}
+h3{
+  font-size:25px;
 }
 div {
   border: 10px black;

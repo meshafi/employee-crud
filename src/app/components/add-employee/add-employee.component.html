@@ -62,7 +62,7 @@
       </mat-form-field>
     </div>
 
-    <div >
+    <div>
       <h3>Salary:</h3>
       <input formControlName="salary" />
       <mat-error *ngIf="employeeForm.get('salary')?.hasError('pattern')">
@@ -72,6 +72,9 @@
 
     <div class="buttons">
       <button type="submit" [disabled]="!employeeForm.valid">Submit</button>
+    </div>
+    <div *ngIf="successMessage" class="success-message">
+      {{ successMessage }}
     </div>
   </form>
 </div>

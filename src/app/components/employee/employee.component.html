@@ -1,63 +1,174 @@
+<div *ngIf="isLoading" class="loader">
+  <h2>Loading...</h2>
+</div>
 <div class="container" *ngIf="employee">
-  <h3>Name:</h3>
-  <input
-    [ngModel]="employee.name"
-    (ngModelChange)="employee.name = $event"
-    [disabled]="!editMode"
-  />
+  <h1>Employee Details</h1>
+  <br />
+  <form #employeeForm="ngForm">
+    <div class="fields">
+      <h3>Name:</h3>
+      <input
+        [(ngModel)]="employee.name"
+        [ngModelOptions]="{ standalone: true }"
+        name="name"
+        #name="ngModel"
+        [disabled]="!editMode"
+        required
+      />
+      <div
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+        class="validation-error"
+      >
+        Name is required.
+      </div>
+    </div>
 
-  <h3>Position:</h3>
-  <input
-    [ngModel]="employee.position"
-    (ngModelChange)="employee.position = $event"
-    [disabled]="!editMode"
-  />
+    <div class="fields">
+      <h3>Position:</h3>
+      <input
+        [(ngModel)]="employee.position"
+        [ngModelOptions]="{ standalone: true }"
+        name="position"
+        #position="ngModel"
+        [disabled]="!editMode"
+        required
+      />
+      <div
+        *ngIf="position.invalid && (position.dirty || position.touched)"
+        class="validation-error"
+      >
+        Position is required.
+      </div>
+    </div>
 
-  <h3>Department:</h3>
-  <input
-    [ngModel]="employee.department"
-    (ngModelChange)="employee.department = $event"
-    [disabled]="!editMode"
-  />
-  <h3>Email:</h3>
-  <input
-    [ngModel]="employee.email"
-    (ngModelChange)="employee.email = $event"
-    [disabled]="!editMode"
-  />
-  <h3>Phone:</h3>
-  <input
-    [ngModel]="employee.phone"
-    (ngModelChange)="employee.phone = $event"
-    [disabled]="!editMode"
-  />
-  <h3>Address:</h3>
-  <input
-    [ngModel]="employee.address"
-    (ngModelChange)="employee.address = $event"
-    [disabled]="!editMode"
-  />
-  <h3>Hire Date:</h3>
-  <input
-    type="date"
-    [ngModel]="employee.hireDate | date : 'yyyy-MM-dd'"
-    (ngModelChange)="employee.hireDate = $event"
-    [disabled]="!editMode"
-  />
-  <h3>Salary:</h3>
-  <input
-    [ngModel]="employee.salary"
-    (ngModelChange)="employee.salary = $event"
-    [disabled]="!editMode"
-  />
+    <div class="fields">
+      <h3>Department:</h3>
+      <input
+        [(ngModel)]="employee.department"
+        [ngModelOptions]="{ standalone: true }"
+        name="department"
+        #department="ngModel"
+        [disabled]="!editMode"
+        required
+      />
+      <div
+        *ngIf="department.invalid && (department.dirty || department.touched)"
+        class="validation-error"
+      >
+        Department is required.
+      </div>
+    </div>
 
-  <div class="buttons">
-    <button
-      (click)="editMode ? updateEmployee() : toggleEditMode()"
-      [ngClass]="{ 'update-button': editMode }"
-    >
-      {{ editMode ? "Update" : "Edit" }}
-    </button>
-    <button class="delete" (click)="deleteAndRedirect()">Delete</button>
-  </div>
+    <div class="fields">
+      <h3>Email:</h3>
+      <input
+        [(ngModel)]="employee.email"
+        [ngModelOptions]="{ standalone: true }"
+        name="email"
+        #email="ngModel"
+        [disabled]="!editMode"
+        required
+        email
+      />
+      <div
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+        class="validation-error"
+      >
+        Enter a valid email address.
+      </div>
+    </div>
+
+    <div class="fields">
+      <h3>Phone:</h3>
+      <input
+        [(ngModel)]="employee.phone"
+        [ngModelOptions]="{ standalone: true }"
+        name="phone"
+        #phone="ngModel"
+        [disabled]="!editMode"
+        required
+        pattern="^[0-9]+$"
+      />
+      <div
+        *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+        class="validation-error"
+      >
+        Enter a valid phone number (numeric only).
+      </div>
+    </div>
+
+    <div class="fields">
+      <h3>Address:</h3>
+      <input
+        [(ngModel)]="employee.address"
+        [ngModelOptions]="{ standalone: true }"
+        name="address"
+        #address="ngModel"
+        [disabled]="!editMode"
+        required
+      />
+      <div
+        *ngIf="address.invalid && (address.dirty || address.touched)"
+        class="validation-error"
+      >
+        Address is required.
+      </div>
+    </div>
+
+    <div class="fields">
+      <h3>Hire Date:</h3>
+      <input
+        type="date"
+        [(ngModel)]="employee.hireDate"
+        [ngModelOptions]="{ standalone: true }"
+        name="hireDate"
+        #hireDate="ngModel"
+        [disabled]="!editMode"
+        required
+      />
+      <div
+        *ngIf="hireDate.invalid && (hireDate.dirty || hireDate.touched)"
+        class="validation-error"
+      >
+        Hire date is required.
+      </div>
+    </div>
+
+    <div class="fields">
+      <h3>Salary:</h3>
+      <input
+        [(ngModel)]="employee.salary"
+        [ngModelOptions]="{ standalone: true }"
+        name="salary"
+        #salary="ngModel"
+        [disabled]="!editMode"
+        required
+        pattern="^[0-9]+$"
+      />
+      <div
+        *ngIf="salary.invalid && (salary.dirty || salary.touched)"
+        class="validation-error"
+      >
+        Enter salary (numeric only).
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button
+        (click)="editMode ? updateEmployee() : toggleEditMode()"
+        [ngClass]="{ 'update-button': editMode }"
+        [disabled]="anyFieldEmpty()"
+      >
+        {{ editMode ? "Update" : "Edit" }}
+      </button>
+      <button class="delete" (click)="deleteAndRedirect()">Delete</button>
+    </div>
+
+    <div *ngIf="successMessage" class="success-message">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="deleteSuccessMessage" class="delete-message">
+      {{ deleteSuccessMessage }}
+    </div>
+  </form>
 </div>
