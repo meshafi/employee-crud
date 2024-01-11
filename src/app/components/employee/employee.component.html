@@ -1,0 +1,63 @@
+<div class="container" *ngIf="employee">
+  <h3>Name:</h3>
+  <input
+    [ngModel]="employee.name"
+    (ngModelChange)="employee.name = $event"
+    [disabled]="!editMode"
+  />
+
+  <h3>Position:</h3>
+  <input
+    [ngModel]="employee.position"
+    (ngModelChange)="employee.position = $event"
+    [disabled]="!editMode"
+  />
+
+  <h3>Department:</h3>
+  <input
+    [ngModel]="employee.department"
+    (ngModelChange)="employee.department = $event"
+    [disabled]="!editMode"
+  />
+  <h3>Email:</h3>
+  <input
+    [ngModel]="employee.email"
+    (ngModelChange)="employee.email = $event"
+    [disabled]="!editMode"
+  />
+  <h3>Phone:</h3>
+  <input
+    [ngModel]="employee.phone"
+    (ngModelChange)="employee.phone = $event"
+    [disabled]="!editMode"
+  />
+  <h3>Address:</h3>
+  <input
+    [ngModel]="employee.address"
+    (ngModelChange)="employee.address = $event"
+    [disabled]="!editMode"
+  />
+  <h3>Hire Date:</h3>
+  <input
+    type="date"
+    [ngModel]="employee.hireDate | date : 'yyyy-MM-dd'"
+    (ngModelChange)="employee.hireDate = $event"
+    [disabled]="!editMode"
+  />
+  <h3>Salary:</h3>
+  <input
+    [ngModel]="employee.salary"
+    (ngModelChange)="employee.salary = $event"
+    [disabled]="!editMode"
+  />
+
+  <div class="buttons">
+    <button
+      (click)="editMode ? updateEmployee() : toggleEditMode()"
+      [ngClass]="{ 'update-button': editMode }"
+    >
+      {{ editMode ? "Update" : "Edit" }}
+    </button>
+    <button class="delete" (click)="deleteAndRedirect()">Delete</button>
+  </div>
+</div>

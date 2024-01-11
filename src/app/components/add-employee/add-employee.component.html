@@ -1,0 +1,77 @@
+<div class="container">
+  <h1>Fill Employee Details</h1>
+  <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
+    <div>
+      <h3>Name:</h3>
+      <input formControlName="name" />
+    </div>
+
+    <div>
+      <h3>Position:</h3>
+      <input formControlName="position" />
+    </div>
+
+    <div>
+      <h3>Department:</h3>
+      <input formControlName="department" />
+    </div>
+
+    <div>
+      <h3>Email:</h3>
+      <input formControlName="email" />
+      <mat-error *ngIf="employeeForm.get('email')?.hasError('email')">
+        Enter a valid email address.
+      </mat-error>
+    </div>
+
+    <div>
+      <h3>Phone:</h3>
+      <input formControlName="phone" />
+      <mat-error *ngIf="employeeForm.get('phone')?.hasError('pattern')">
+        Enter a valid phone number (numeric only).
+      </mat-error>
+    </div>
+
+    <div>
+      <h3>Address:</h3>
+      <input formControlName="address" />
+    </div>
+
+    <div style="margin-bottom: 5px">
+      <h3>Hire Date:</h3>
+      <mat-form-field appearance="fill" style="height: 65px">
+        <input
+          matInput
+          [matDatepicker]="hireDatePicker"
+          formControlName="hireDate"
+          style="padding: 0"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="hireDatePicker"
+          style="height: 10px"
+        >
+          <mat-icon matDatepickerToggleIcon style="font-size: 18px"
+            >calendar_today</mat-icon
+          >
+        </mat-datepicker-toggle>
+        <mat-datepicker #hireDatePicker></mat-datepicker>
+        <mat-error *ngIf="employeeForm.get('hireDate')?.hasError('required')">
+          Hire date is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div >
+      <h3>Salary:</h3>
+      <input formControlName="salary" />
+      <mat-error *ngIf="employeeForm.get('salary')?.hasError('pattern')">
+        Enter salary (numeric only).
+      </mat-error>
+    </div>
+
+    <div class="buttons">
+      <button type="submit" [disabled]="!employeeForm.valid">Submit</button>
+    </div>
+  </form>
+</div>
