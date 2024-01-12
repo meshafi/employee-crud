@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EmployeeComponent,
     AddEmployeeComponent,
   ],
-  imports: [MatTableModule, BrowserModule, AppRoutingModule, MatIconModule,FormsModule, MatTooltipModule, HttpClientModule,ReactiveFormsModule,MatInputModule,MatDatepickerModule,MatNativeDateModule,BrowserAnimationsModule],
+  imports: [MatTableModule, BrowserModule, AppRoutingModule, MatIconModule,FormsModule, MatTooltipModule, HttpClientModule,ReactiveFormsModule,MatInputModule,MatDatepickerModule,MatNativeDateModule,BrowserAnimationsModule,MatPaginatorModule],
   providers: [],
   bootstrap: [AppComponent],
 })

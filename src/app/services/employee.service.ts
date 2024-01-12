@@ -11,8 +11,9 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) {}
 
-  getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.apiUrl);
+  getEmployees(page: number, perPage: number): Observable<any> {
+    const params = { page: page.toString(), per_page: perPage.toString() };
+    return this.http.get<any>(this.apiUrl, { params });
   }
 
   getEmployeeById(id: string): Observable<Employee> {
